@@ -1,5 +1,5 @@
 
-# Time-stamp: "2002-08-17 18:35:57 MDT"  -*-perl-*-
+# Time-stamp: "2004-12-29 19:56:54 AST"  -*-perl-*-
 
 require 5;
 package Business::US_Amort; # This is a class
@@ -8,7 +8,7 @@ use vars qw($VERSION $Debug %Proto);
 use Carp;
 
 $Debug = 0 unless defined $Debug;
-$VERSION = "0.08";
+$VERSION = "0.09";
 
 ###########################################################################
 
