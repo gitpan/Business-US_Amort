@@ -1,5 +1,5 @@
-#!/bin/false
-# Time-stamp: "1999-03-05 12:43:02 MST"  -*-perl-*-
+
+# Time-stamp: "1999-10-29 16:21:33 MDT"  -*-perl-*-
 
 require 5;
 package Business::US_Amort; # This is a class
@@ -8,7 +8,7 @@ use vars qw($VERSION $Debug %Proto);
 use Carp;
 
 $Debug = 0 unless defined $Debug;
-$VERSION = "0.04";
+$VERSION = "0.05";
 
 ###########################################################################
 
@@ -101,7 +101,7 @@ sub simple ($$$) {
   
   return
     wantarray ?
-      ($o->initial_monthly_payment, $o->total_paid_toward_interest, $o)
+      ($o->initial_monthly_payment, $o->total_paid_interest, $o)
     : $o->initial_monthly_payment
   ;
 }
