@@ -1,5 +1,5 @@
 
-# Time-stamp: "1999-10-29 16:21:33 MDT"  -*-perl-*-
+# Time-stamp: "2000-05-14 01:10:48 MDT"  -*-perl-*-
 
 require 5;
 package Business::US_Amort; # This is a class
@@ -8,7 +8,7 @@ use vars qw($VERSION $Debug %Proto);
 use Carp;
 
 $Debug = 0 unless defined $Debug;
-$VERSION = "0.05";
+$VERSION = "0.07";
 
 ###########################################################################
 
@@ -433,8 +433,8 @@ sub run {
 
   $this->{'_remainder'} = $this->maybe_round( $this->{'principal'} ); # AKA "p"
 
-  unless($this->{'interest_rate'} > 0) {
-    $this->{'error'} = 'interest rate must be positive and nonzero';
+  unless($this->{'interest_rate'} >= 0) {
+    $this->{'error'} = 'interest rate must be nonnegative';
     return 0;
   }
 
@@ -449,10 +449,21 @@ sub run {
     $this->{'interest_rate'} / 1200;
   my $n = # number of months the loan is amortized over
     int($this->{'term'} * 12);
-  $this->{'initial_monthly_payment'} =
-    $this->maybe_round(
-      $this->{'_remainder'} * $j / ( 1 - (1 + $j) ** (-$n) )
-    );
+
+  #print "j: $j\n";
+  if($j) {
+    #print "Nonzero interest\n";
+    $this->{'initial_monthly_payment'} =
+      $this->maybe_round(
+        $this->{'_remainder'} * $j / ( 1 - (1 + $j) ** (-$n) )
+      );
+  } else {
+    # interest-free loan -- much simpler calculation
+    $this->{'initial_monthly_payment'} =
+      $this->maybe_round(
+        $this->{'_remainder'} / $n
+      );
+  }
   # ...the rest is just iteration
 
   # init...
@@ -605,13 +616,13 @@ But let me know if it gives you any problems, OK?
 
 =head1 COPYRIGHT
 
-Copyright 1999, Sean M. Burke C<sburke@netadventure.net>, all rights
+Copyright 1999, 2000, Sean M. Burke C<sburke@cpan.org>, all rights
 reserved.  This program is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
 
 =head1 AUTHOR
 
-Sean M. Burke C<sburke@netadventure.net>
+Sean M. Burke C<sburke@cpan.org>
 
 =cut
 

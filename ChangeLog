@@ -1,5 +1,9 @@
 Revision history for Perl extension Business::US_Amort
-                                        Time-stamp: "1999-10-29 16:26:02 MDT"
+                                        Time-stamp: "2000-05-14 01:12:33 MDT"
+
+2000-05-14  Sean M. Burke  sburke@cpan.org
+	* Release 0.07 -- noting my new email address.
+	* Allows computing 0-interest loans now.
 
 1999-10-29  Sean M. Burke  sburke@netadventure.net
 	* Release 0.05 -- second release version.
