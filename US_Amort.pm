@@ -1,5 +1,5 @@
 
-# Time-stamp: "2000-05-14 01:10:48 MDT"  -*-perl-*-
+# Time-stamp: "2002-08-17 18:35:57 MDT"  -*-perl-*-
 
 require 5;
 package Business::US_Amort; # This is a class
@@ -8,7 +8,7 @@ use vars qw($VERSION $Debug %Proto);
 use Carp;
 
 $Debug = 0 unless defined $Debug;
-$VERSION = "0.07";
+$VERSION = "0.08";
 
 ###########################################################################
 
@@ -71,7 +71,7 @@ really don't need any frills.
 Amortizes based on these parameters.  In a scalar context,
 returns the initial monthly payment.
 
-In an array context, returns a three item list consisting of:
+In an array context, returns a three-item list consisting of:
 the initial monthly payment, the total paid toward interest,
 and the loan object, in case you want to do things with it.
 
@@ -233,7 +233,7 @@ Increase as necessary.
 
 =back
 
-=head2 INTERATION ATTRIBUTES
+=head2 ITERATION ATTRIBUTES
 
 These are attributes of little or no interest once C<run> is done, but
 may be of interest to callbacks while C<run> is running, or may
@@ -387,7 +387,8 @@ sub destroy { # destructor
   bless $this, 'DEAD';
   return;
 }
-\&DEAD::destroy = \&destroy;
+sub DEAD::destroy { return }
+
 
 #===========================================================================
 
@@ -590,7 +591,7 @@ this class won't stop you.
 * Perl is liable to produce tiny math errors, like just about any
 other language that does its math in binary but has to convert to and
 from decimal for purposes of human interaction.  I've seen this
-surface as tiny discrepencies in loan calculations -- "tiny" as in
+surface as tiny discrepancies in loan calculations -- "tiny" as in
 less than $1 for even multi-million-dollar loans amortized over
 decades.
 
@@ -616,7 +617,7 @@ But let me know if it gives you any problems, OK?
 
 =head1 COPYRIGHT
 
-Copyright 1999, 2000, Sean M. Burke C<sburke@cpan.org>, all rights
+Copyright 1999-2002, Sean M. Burke C<sburke@cpan.org>, all rights
 reserved.  This program is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
 
